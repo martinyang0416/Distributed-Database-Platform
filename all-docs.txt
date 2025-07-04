@@ -1,0 +1,1615 @@
+Processing file: ./extract_docs.py
+  Function Name: extract_function_info
+  Function Header: def extract_function_info(filepath):
+  Docstring:
+    '''
+Extracts function headers and docstrings from a Python file.
+
+Args:
+    filepath (str): The path to the Python file.
+
+Returns:
+    list: A list of tuples, where each tuple contains the function name,
+          header string, and docstring. Returns an empty list if parsing fails
+          or no functions are found.
+    '''
+--------------------
+  Function Name: process_directory
+  Function Header: def process_directory(directory_path):
+  Docstring:
+    '''
+Walks through a directory, finds Python files (excluding test files),
+and extracts function information.
+
+Args:
+    directory_path (str): The path to the directory to process.
+    '''
+--------------------
+  Function Name: format_arg_with_default
+  Function Header: def format_arg_with_default(arg, default):
+  Docstring:
+    No docstring found.
+--------------------
+========================================
+Processing file: ./distributed_db/coordinator/coordinator.py
+  Function Name: main
+  Function Header: def main():
+  Docstring:
+    '''
+Main entry point.
+    '''
+--------------------
+  Function Name: __init__
+  Function Header: def __init__(self, host: str=COORDINATOR_HOST, port: int=COORDINATOR_PORT, data_dir: str=DB_STORAGE_PATH, replication_factor: int=DEFAULT_REPLICATION_FACTOR):
+  Docstring:
+    '''
+Initialize the coordinator.
+
+Args:
+    host: Host to bind to
+    port: Port to bind to
+    data_dir: Directory to store data
+    replication_factor: Number of replicas for each partition
+    '''
+--------------------
+  Function Name: _setup_routes
+  Function Header: def _setup_routes(self):
+  Docstring:
+    '''
+Set up Flask routes.
+    '''
+--------------------
+  Function Name: start
+  Function Header: def start(self):
+  Docstring:
+    '''
+Start the coordinator service.
+    '''
+--------------------
+  Function Name: list_databases
+  Function Header: def list_databases(self):
+  Docstring:
+    '''
+List all databases.
+    '''
+--------------------
+  Function Name: create_database
+  Function Header: def create_database(self):
+  Docstring:
+    '''
+Create a new database.
+    '''
+--------------------
+  Function Name: get_database
+  Function Header: def get_database(self, db_name):
+  Docstring:
+    '''
+Get database schema.
+    '''
+--------------------
+  Function Name: delete_database
+  Function Header: def delete_database(self, db_name):
+  Docstring:
+    '''
+Delete a database.
+    '''
+--------------------
+  Function Name: list_storage_nodes
+  Function Header: def list_storage_nodes(self):
+  Docstring:
+    '''
+List all storage nodes.
+    '''
+--------------------
+  Function Name: register_storage_node
+  Function Header: def register_storage_node(self):
+  Docstring:
+    '''
+Register a new storage node.
+    '''
+--------------------
+  Function Name: get_storage_node
+  Function Header: def get_storage_node(self, node_id):
+  Docstring:
+    '''
+Get storage node information.
+    '''
+--------------------
+  Function Name: unregister_storage_node
+  Function Header: def unregister_storage_node(self, node_id):
+  Docstring:
+    '''
+Unregister a storage node.
+    '''
+--------------------
+  Function Name: route_query
+  Function Header: def route_query(self, db_name):
+  Docstring:
+    '''
+Route a query to the appropriate storage nodes.
+    '''
+--------------------
+  Function Name: list_partitions
+  Function Header: def list_partitions(self):
+  Docstring:
+    '''
+List all partitions.
+    '''
+--------------------
+  Function Name: get_database_partitions
+  Function Header: def get_database_partitions(self, db_name):
+  Docstring:
+    '''
+Get partitions for a specific database.
+    '''
+--------------------
+  Function Name: get_cache_stats
+  Function Header: def get_cache_stats(self):
+  Docstring:
+    '''
+Get cache statistics.
+    '''
+--------------------
+  Function Name: clear_cache
+  Function Header: def clear_cache(self):
+  Docstring:
+    '''
+Clear the cache.
+    '''
+--------------------
+  Function Name: join_cluster
+  Function Header: def join_cluster(self):
+  Docstring:
+    '''
+Join a cluster.
+    '''
+--------------------
+  Function Name: get_cluster_status
+  Function Header: def get_cluster_status(self):
+  Docstring:
+    '''
+Get cluster status.
+    '''
+--------------------
+  Function Name: _create_initial_partitions
+  Function Header: def _create_initial_partitions(self, db_schema: DatabaseSchema) -> None:
+  Docstring:
+    '''
+Create initial partitions for a new database.
+
+Args:
+    db_schema: Database schema
+    '''
+--------------------
+  Function Name: _get_target_partitions
+  Function Header: def _get_target_partitions(self, db_schema: DatabaseSchema, partitions: Dict[str, Dict], query_data: Dict) -> List[str]:
+  Docstring:
+    '''
+Determine which partitions to query based on the data.
+
+Args:
+    db_schema: Database schema
+    partitions: Dictionary of partitions
+    query_data: Query data
+
+Returns:
+    List of partition IDs to query
+    '''
+--------------------
+  Function Name: _execute_query
+  Function Header: def _execute_query(self, db_name: str, query_data: Dict, storage_nodes: Dict[str, Dict]) -> Dict:
+  Docstring:
+    '''
+Execute a query on storage nodes.
+
+Args:
+    db_name: Database name
+    query_data: Query data
+    storage_nodes: Dictionary of storage nodes
+
+Returns:
+    Query result
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/coordinator/cache_manager.py
+  Function Name: __init__
+  Function Header: def __init__(self, max_size: int=COORDINATOR_CACHE_SIZE):
+  Docstring:
+    '''
+Initialize the cache manager.
+
+Args:
+    max_size: Maximum number of items to store in the cache
+    '''
+--------------------
+  Function Name: get
+  Function Header: def get(self, key: str) -> Optional[Any]:
+  Docstring:
+    '''
+Get a value from the cache.
+
+Args:
+    key: Cache key
+    
+Returns:
+    Cached value if found and not expired, None otherwise
+    '''
+--------------------
+  Function Name: set
+  Function Header: def set(self, key: str, value: Any, ttl: Optional[float]=None) -> None:
+  Docstring:
+    '''
+Set a value in the cache.
+
+Args:
+    key: Cache key
+    value: Value to cache
+    ttl: Time to live in seconds, or None for no expiration
+    '''
+--------------------
+  Function Name: delete
+  Function Header: def delete(self, key: str) -> bool:
+  Docstring:
+    '''
+Delete a value from the cache.
+
+Args:
+    key: Cache key
+    
+Returns:
+    True if the key was found and deleted, False otherwise
+    '''
+--------------------
+  Function Name: clear
+  Function Header: def clear(self) -> None:
+  Docstring:
+    '''
+Clear the entire cache.
+    '''
+--------------------
+  Function Name: get_stats
+  Function Header: def get_stats(self) -> Dict[str, int]:
+  Docstring:
+    '''
+Get cache statistics.
+
+Returns:
+    Dictionary with cache statistics
+    '''
+--------------------
+  Function Name: _cleanup_expired
+  Function Header: def _cleanup_expired(self) -> None:
+  Docstring:
+    '''
+Background thread to clean up expired cache entries.
+    '''
+--------------------
+  Function Name: invalidate_by_prefix
+  Function Header: def invalidate_by_prefix(self, prefix: str) -> int:
+  Docstring:
+    '''
+Invalidate all cache entries with keys starting with the given prefix.
+
+Args:
+    prefix: Key prefix to match
+    
+Returns:
+    Number of entries invalidated
+    '''
+--------------------
+  Function Name: get_keys
+  Function Header: def get_keys(self) -> List[str]:
+  Docstring:
+    '''
+Get all keys in the cache.
+
+Returns:
+    List of cache keys
+    '''
+--------------------
+  Function Name: get_many
+  Function Header: def get_many(self, keys: List[str]) -> Dict[str, Any]:
+  Docstring:
+    '''
+Get multiple values from the cache.
+
+Args:
+    keys: List of cache keys
+    
+Returns:
+    Dictionary mapping keys to values (only for keys that exist and are not expired)
+    '''
+--------------------
+  Function Name: set_many
+  Function Header: def set_many(self, items: Dict[str, Any], ttl: Optional[float]=None) -> None:
+  Docstring:
+    '''
+Set multiple values in the cache.
+
+Args:
+    items: Dictionary mapping keys to values
+    ttl: Time to live in seconds, or None for no expiration
+    '''
+--------------------
+  Function Name: delete_many
+  Function Header: def delete_many(self, keys: List[str]) -> int:
+  Docstring:
+    '''
+Delete multiple values from the cache.
+
+Args:
+    keys: List of cache keys
+    
+Returns:
+    Number of keys that were found and deleted
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/coordinator/consensus.py
+  Function Name: __init__
+  Function Header: def __init__(self, self_address: str, partner_addresses: List[str]):
+  Docstring:
+    '''
+Initialize the consensus manager.
+
+Args:
+    self_address: Address of this node in the format 'host:port'
+    partner_addresses: List of addresses of other nodes in the format 'host:port'
+    '''
+--------------------
+  Function Name: add_database
+  Function Header: def add_database(self, db_name: str, db_info: Dict[str, Any]) -> bool:
+  Docstring:
+    '''
+Add a new database to the metadata store.
+
+Args:
+    db_name: Name of the database
+    db_info: Database information
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: remove_database
+  Function Header: def remove_database(self, db_name: str) -> bool:
+  Docstring:
+    '''
+Remove a database from the metadata store.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: update_database
+  Function Header: def update_database(self, db_name: str, db_info: Dict[str, Any]) -> bool:
+  Docstring:
+    '''
+Update database information.
+
+Args:
+    db_name: Name of the database
+    db_info: Updated database information
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: add_storage_node
+  Function Header: def add_storage_node(self, node_id: str, node_info: Dict[str, Any]) -> bool:
+  Docstring:
+    '''
+Add a new storage node to the metadata store.
+
+Args:
+    node_id: ID of the storage node
+    node_info: Storage node information
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: remove_storage_node
+  Function Header: def remove_storage_node(self, node_id: str) -> bool:
+  Docstring:
+    '''
+Remove a storage node from the metadata store.
+
+Args:
+    node_id: ID of the storage node
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: update_storage_node
+  Function Header: def update_storage_node(self, node_id: str, node_info: Dict[str, Any]) -> bool:
+  Docstring:
+    '''
+Update storage node information.
+
+Args:
+    node_id: ID of the storage node
+    node_info: Updated storage node information
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: add_partition
+  Function Header: def add_partition(self, partition_id: str, partition_info: Dict[str, Any]) -> bool:
+  Docstring:
+    '''
+Add a new partition to the metadata store.
+
+Args:
+    partition_id: ID of the partition
+    partition_info: Partition information
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: remove_partition
+  Function Header: def remove_partition(self, partition_id: str) -> bool:
+  Docstring:
+    '''
+Remove a partition from the metadata store.
+
+Args:
+    partition_id: ID of the partition
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: update_partition
+  Function Header: def update_partition(self, partition_id: str, partition_info: Dict[str, Any]) -> bool:
+  Docstring:
+    '''
+Update partition information.
+
+Args:
+    partition_id: ID of the partition
+    partition_info: Updated partition information
+
+Returns:
+    True if successful, False otherwise
+    '''
+--------------------
+  Function Name: get_database
+  Function Header: def get_database(self, db_name: str) -> Optional[Dict[str, Any]]:
+  Docstring:
+    '''
+Get database information.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    Database information if found, None otherwise
+    '''
+--------------------
+  Function Name: get_all_databases
+  Function Header: def get_all_databases(self) -> Dict[str, Dict[str, Any]]:
+  Docstring:
+    '''
+Get all database information.
+
+Returns:
+    Dictionary of all databases
+    '''
+--------------------
+  Function Name: get_storage_node
+  Function Header: def get_storage_node(self, node_id: str) -> Optional[Dict[str, Any]]:
+  Docstring:
+    '''
+Get storage node information.
+
+Args:
+    node_id: ID of the storage node
+
+Returns:
+    Storage node information if found, None otherwise
+    '''
+--------------------
+  Function Name: get_all_storage_nodes
+  Function Header: def get_all_storage_nodes(self) -> Dict[str, Dict[str, Any]]:
+  Docstring:
+    '''
+Get all storage node information.
+
+Returns:
+    Dictionary of all storage nodes
+    '''
+--------------------
+  Function Name: get_partition
+  Function Header: def get_partition(self, partition_id: str) -> Optional[Dict[str, Any]]:
+  Docstring:
+    '''
+Get partition information.
+
+Args:
+    partition_id: ID of the partition
+
+Returns:
+    Partition information if found, None otherwise
+    '''
+--------------------
+  Function Name: get_all_partitions
+  Function Header: def get_all_partitions(self) -> Dict[str, Dict[str, Any]]:
+  Docstring:
+    '''
+Get all partition information.
+
+Returns:
+    Dictionary of all partitions
+    '''
+--------------------
+  Function Name: get_database_partitions
+  Function Header: def get_database_partitions(self, db_name: str) -> Dict[str, Dict[str, Any]]:
+  Docstring:
+    '''
+Get all partitions for a specific database.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    Dictionary of partitions for the database
+    '''
+--------------------
+  Function Name: is_leader
+  Function Header: def is_leader(self) -> bool:
+  Docstring:
+    '''
+Check if this node is the leader.
+
+Returns:
+    True if this node is the leader, False otherwise
+    '''
+--------------------
+  Function Name: wait_for_sync
+  Function Header: def wait_for_sync(self, timeout: float=5.0) -> bool:
+  Docstring:
+    '''
+Wait for this node to sync with the cluster.
+
+Args:
+    timeout: Maximum time to wait in seconds
+
+Returns:
+    True if synced, False if timed out
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/coordinator/schema_manager.py
+  Function Name: __init__
+  Function Header: def __init__(self, consensus_manager, schema_dir: str='schemas'):
+  Docstring:
+    '''
+Initialize the schema manager.
+
+Args:
+    consensus_manager: Consensus manager instance
+    schema_dir: Directory to store schema files
+    '''
+--------------------
+  Function Name: create_database
+  Function Header: def create_database(self, db_schema: DatabaseSchema) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Create a new database with the given schema.
+
+Args:
+    db_schema: Database schema
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: get_database_schema
+  Function Header: def get_database_schema(self, db_name: str) -> Optional[DatabaseSchema]:
+  Docstring:
+    '''
+Get the schema for a database.
+
+Args:
+    db_name: Name of the database
+    
+Returns:
+    Database schema if found, None otherwise
+    '''
+--------------------
+  Function Name: list_databases
+  Function Header: def list_databases(self) -> List[str]:
+  Docstring:
+    '''
+List all databases.
+
+Returns:
+    List of database names
+    '''
+--------------------
+  Function Name: delete_database
+  Function Header: def delete_database(self, db_name: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Delete a database.
+
+Args:
+    db_name: Name of the database
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: update_database_schema
+  Function Header: def update_database_schema(self, db_schema: DatabaseSchema) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Update a database schema.
+
+Args:
+    db_schema: Updated database schema
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/storage/storage_node.py
+  Function Name: main
+  Function Header: def main():
+  Docstring:
+    '''
+Main entry point.
+    '''
+--------------------
+  Function Name: __init__
+  Function Header: def __init__(self, host: str, port: int, data_dir: str, coordinator_url: str, node_id: Optional[str]=None):
+  Docstring:
+    '''
+Initialize the storage node.
+
+Args:
+    host: Host to bind to
+    port: Port to bind to
+    data_dir: Directory to store data
+    coordinator_url: URL of the coordinator
+    node_id: ID of this node (generated if not provided)
+    '''
+--------------------
+  Function Name: _setup_routes
+  Function Header: def _setup_routes(self):
+  Docstring:
+    '''
+Set up Flask routes.
+    '''
+--------------------
+  Function Name: start
+  Function Header: def start(self):
+  Docstring:
+    '''
+Start the storage node service.
+    '''
+--------------------
+  Function Name: _register_with_coordinator
+  Function Header: def _register_with_coordinator(self):
+  Docstring:
+    '''
+Register this node with the coordinator.
+    '''
+--------------------
+  Function Name: list_databases
+  Function Header: def list_databases(self):
+  Docstring:
+    '''
+List all databases.
+    '''
+--------------------
+  Function Name: create_database
+  Function Header: def create_database(self):
+  Docstring:
+    '''
+Create a new database.
+    '''
+--------------------
+  Function Name: get_database
+  Function Header: def get_database(self, db_name):
+  Docstring:
+    '''
+Get database information.
+    '''
+--------------------
+  Function Name: delete_database
+  Function Header: def delete_database(self, db_name):
+  Docstring:
+    '''
+Delete a database.
+    '''
+--------------------
+  Function Name: get_database_file
+  Function Header: def get_database_file(self, db_name):
+  Docstring:
+    '''
+Get database file (for replication).
+    '''
+--------------------
+  Function Name: get_database_type
+  Function Header: def get_database_type(self, db_name):
+  Docstring:
+    '''
+Get database type.
+    '''
+--------------------
+  Function Name: execute_query
+  Function Header: def execute_query(self, db_name):
+  Docstring:
+    '''
+Execute a query on a database.
+    '''
+--------------------
+  Function Name: list_partitions
+  Function Header: def list_partitions(self):
+  Docstring:
+    '''
+List all partitions.
+    '''
+--------------------
+  Function Name: get_database_partitions
+  Function Header: def get_database_partitions(self, db_name):
+  Docstring:
+    '''
+Get partitions for a specific database.
+    '''
+--------------------
+  Function Name: create_partition
+  Function Header: def create_partition(self):
+  Docstring:
+    '''
+Create a new partition.
+    '''
+--------------------
+  Function Name: delete_partition
+  Function Header: def delete_partition(self, partition_id):
+  Docstring:
+    '''
+Delete a partition.
+    '''
+--------------------
+  Function Name: list_replications
+  Function Header: def list_replications(self):
+  Docstring:
+    '''
+List all replication tasks.
+    '''
+--------------------
+  Function Name: start_replication
+  Function Header: def start_replication(self):
+  Docstring:
+    '''
+Start a replication task.
+    '''
+--------------------
+  Function Name: get_replication_status
+  Function Header: def get_replication_status(self, task_id):
+  Docstring:
+    '''
+Get the status of a replication task.
+    '''
+--------------------
+  Function Name: cancel_replication
+  Function Header: def cancel_replication(self, task_id):
+  Docstring:
+    '''
+Cancel a replication task.
+    '''
+--------------------
+  Function Name: get_status
+  Function Header: def get_status(self):
+  Docstring:
+    '''
+Get node status.
+    '''
+--------------------
+  Function Name: _get_sql_databases
+  Function Header: def _get_sql_databases(self) -> List[str]:
+  Docstring:
+    '''
+Get a list of SQL databases.
+
+Returns:
+    List of database names
+    '''
+--------------------
+  Function Name: _get_nosql_databases
+  Function Header: def _get_nosql_databases(self) -> List[str]:
+  Docstring:
+    '''
+Get a list of NoSQL databases.
+
+Returns:
+    List of database names
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/storage/nosql_storage.py
+  Function Name: __init__
+  Function Header: def __init__(self, data_dir: str):
+  Docstring:
+    '''
+Initialize the NoSQL storage.
+
+Args:
+    data_dir: Directory to store database files
+    '''
+--------------------
+  Function Name: create_database
+  Function Header: def create_database(self, db_name: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Create a new database.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: delete_database
+  Function Header: def delete_database(self, db_name: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Delete a database.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: execute_query
+  Function Header: def execute_query(self, db_name: str, query_data: Dict[str, Any]) -> QueryResult:
+  Docstring:
+    '''
+Execute a query on a database.
+
+Args:
+    db_name: Name of the database
+    query_data: Query data
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: get_collections
+  Function Header: def get_collections(self, db_name: str) -> List[str]:
+  Docstring:
+    '''
+Get a list of collections in a database.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    List of collection names
+    '''
+--------------------
+  Function Name: get_collection_schema
+  Function Header: def get_collection_schema(self, db_name: str, collection_name: str) -> Dict[str, Any]:
+  Docstring:
+    '''
+Get the schema for a collection.
+This is an approximation since NoSQL databases don't have fixed schemas.
+
+Args:
+    db_name: Name of the database
+    collection_name: Name of the collection
+
+Returns:
+    Collection schema approximation
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/storage/sql_storage.py
+  Function Name: __init__
+  Function Header: def __init__(self, data_dir: str):
+  Docstring:
+    '''
+Initialize the SQL storage.
+
+Args:
+    data_dir: Directory to store database files
+    '''
+--------------------
+  Function Name: create_database
+  Function Header: def create_database(self, db_name: str, schema: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Create a new database with the given schema.
+
+Args:
+    db_name: Name of the database
+    schema: Database schema
+
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: delete_database
+  Function Header: def delete_database(self, db_name: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Delete a database.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: execute_query
+  Function Header: def execute_query(self, db_name: str, query_data: Dict[str, Any]) -> QueryResult:
+  Docstring:
+    '''
+Execute a query on a database.
+
+Args:
+    db_name: Name of the database
+    query_data: Query data
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: get_tables
+  Function Header: def get_tables(self, db_name: str) -> List[str]:
+  Docstring:
+    '''
+Get a list of tables in a database.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    List of table names
+    '''
+--------------------
+  Function Name: get_table_schema
+  Function Header: def get_table_schema(self, db_name: str, table_name: str) -> Dict[str, Any]:
+  Docstring:
+    '''
+Get the schema for a table.
+
+Args:
+    db_name: Name of the database
+    table_name: Name of the table
+
+Returns:
+    Table schema
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/storage/partition_manager.py
+  Function Name: __init__
+  Function Header: def __init__(self, data_dir: str, partition_dir: str='partitions'):
+  Docstring:
+    '''
+Initialize the partition manager.
+
+Args:
+    data_dir: Directory containing database files
+    partition_dir: Directory to store partition metadata
+    '''
+--------------------
+  Function Name: create_partition
+  Function Header: def create_partition(self, partition_id: str, db_name: str, partition_type: PartitionType, partition_info: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Create a new partition.
+
+Args:
+    partition_id: ID of the partition
+    db_name: Name of the database
+    partition_type: Type of partitioning
+    partition_info: Partition information
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: delete_partition
+  Function Header: def delete_partition(self, partition_id: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Delete a partition.
+
+Args:
+    partition_id: ID of the partition
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: get_partition
+  Function Header: def get_partition(self, partition_id: str) -> Optional[Dict[str, Any]]:
+  Docstring:
+    '''
+Get partition information.
+
+Args:
+    partition_id: ID of the partition
+    
+Returns:
+    Partition information if found, None otherwise
+    '''
+--------------------
+  Function Name: list_partitions
+  Function Header: def list_partitions(self) -> List[Dict[str, Any]]:
+  Docstring:
+    '''
+List all partitions.
+
+Returns:
+    List of partition information
+    '''
+--------------------
+  Function Name: get_database_partitions
+  Function Header: def get_database_partitions(self, db_name: str) -> List[Dict[str, Any]]:
+  Docstring:
+    '''
+Get all partitions for a specific database.
+
+Args:
+    db_name: Name of the database
+    
+Returns:
+    List of partition information
+    '''
+--------------------
+  Function Name: split_horizontal_partition
+  Function Header: def split_horizontal_partition(self, partition_id: str, split_value: Any, new_partition_id: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Split a horizontal partition into two partitions.
+
+Args:
+    partition_id: ID of the partition to split
+    split_value: Value to split on
+    new_partition_id: ID for the new partition
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: split_vertical_partition
+  Function Header: def split_vertical_partition(self, partition_id: str, columns: List[str], new_partition_id: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Split a vertical partition into two partitions.
+
+Args:
+    partition_id: ID of the partition to split
+    columns: Columns to move to the new partition
+    new_partition_id: ID for the new partition
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: merge_horizontal_partitions
+  Function Header: def merge_horizontal_partitions(self, partition_ids: List[str], new_partition_id: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Merge multiple horizontal partitions into a single partition.
+
+Args:
+    partition_ids: IDs of the partitions to merge
+    new_partition_id: ID for the new partition
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: merge_vertical_partitions
+  Function Header: def merge_vertical_partitions(self, partition_ids: List[str], new_partition_id: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Merge multiple vertical partitions into a single partition.
+
+Args:
+    partition_ids: IDs of the partitions to merge
+    new_partition_id: ID for the new partition
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: _get_all_columns
+  Function Header: def _get_all_columns(self, db_name: str, table_name: Optional[str]=None) -> List[str]:
+  Docstring:
+    '''
+Get all columns for a database table.
+
+Args:
+    db_name: Name of the database
+    table_name: Name of the table (for SQL databases)
+    
+Returns:
+    List of column names
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/storage/replication_manager.py
+  Function Name: __init__
+  Function Header: def __init__(self, data_dir: str, node_id: str, coordinator_url: str):
+  Docstring:
+    '''
+Initialize the replication manager.
+
+Args:
+    data_dir: Directory containing database files
+    node_id: ID of this storage node
+    coordinator_url: URL of the coordinator
+    '''
+--------------------
+  Function Name: replicate_database
+  Function Header: def replicate_database(self, db_name: str, source_node: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Replicate a database from another node.
+
+Args:
+    db_name: Name of the database
+    source_node: Information about the source node
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: get_replication_status
+  Function Header: def get_replication_status(self, task_id: str) -> Optional[Dict[str, Any]]:
+  Docstring:
+    '''
+Get the status of a replication task.
+
+Args:
+    task_id: ID of the replication task
+    
+Returns:
+    Task information if found, None otherwise
+    '''
+--------------------
+  Function Name: list_replication_tasks
+  Function Header: def list_replication_tasks(self) -> List[Dict[str, Any]]:
+  Docstring:
+    '''
+List all replication tasks.
+
+Returns:
+    List of replication task information
+    '''
+--------------------
+  Function Name: cancel_replication
+  Function Header: def cancel_replication(self, task_id: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Cancel a replication task.
+
+Args:
+    task_id: ID of the replication task
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: _replication_worker
+  Function Header: def _replication_worker(self) -> None:
+  Docstring:
+    '''
+Background thread for processing replication tasks.
+    '''
+--------------------
+  Function Name: _is_sql_database
+  Function Header: def _is_sql_database(self, db_name: str, source_node: Dict[str, Any]) -> bool:
+  Docstring:
+    '''
+Determine if a database is SQL or NoSQL.
+
+Args:
+    db_name: Name of the database
+    source_node: Information about the source node
+    
+Returns:
+    True if SQL, False if NoSQL
+    '''
+--------------------
+  Function Name: _replicate_sql_database
+  Function Header: def _replicate_sql_database(self, db_name: str, source_node: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Replicate a SQL database from another node.
+
+Args:
+    db_name: Name of the database
+    source_node: Information about the source node
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: _replicate_nosql_database
+  Function Header: def _replicate_nosql_database(self, db_name: str, source_node: Dict[str, Any]) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Replicate a NoSQL database from another node.
+
+Args:
+    db_name: Name of the database
+    source_node: Information about the source node
+    
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/common/config.py
+  No functions found or error processing file.
+========================================
+Processing file: ./distributed_db/common/models.py
+  No functions found or error processing file.
+========================================
+Processing file: ./distributed_db/common/utils.py
+  Function Name: generate_id
+  Function Header: def generate_id() -> str:
+  Docstring:
+    '''
+Generate a unique ID.
+    '''
+--------------------
+  Function Name: ensure_directory_exists
+  Function Header: def ensure_directory_exists(directory_path: str) -> None:
+  Docstring:
+    '''
+Ensure that a directory exists, creating it if necessary.
+    '''
+--------------------
+  Function Name: make_http_request
+  Function Header: def make_http_request(url: str, method: str='GET', data: Optional[Dict]=None) -> Dict:
+  Docstring:
+    '''
+Make an HTTP request to a given URL.
+    '''
+--------------------
+  Function Name: load_json_file
+  Function Header: def load_json_file(file_path: str) -> Dict:
+  Docstring:
+    '''
+Load a JSON file.
+    '''
+--------------------
+  Function Name: save_json_file
+  Function Header: def save_json_file(file_path: str, data: Dict) -> bool:
+  Docstring:
+    '''
+Save data to a JSON file.
+    '''
+--------------------
+  Function Name: parse_connection_string
+  Function Header: def parse_connection_string(connection_string: str) -> Dict[str, str]:
+  Docstring:
+    '''
+Parse a connection string into its components.
+    '''
+--------------------
+  Function Name: get_logger
+  Function Header: def get_logger(name: str) -> logging.Logger:
+  Docstring:
+    '''
+Get a logger with the given name.
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/client/query_router.py
+  Function Name: __init__
+  Function Header: def __init__(self, coordinator_url: str):
+  Docstring:
+    '''
+Initialize the query router.
+
+Args:
+    coordinator_url: URL of the coordinator
+    '''
+--------------------
+  Function Name: route_query
+  Function Header: def route_query(self, db_name: str, query_data: Dict[str, Any], direct_node: Optional[Dict[str, Any]]=None) -> Dict[str, Any]:
+  Docstring:
+    '''
+Route a query to the appropriate node.
+
+Args:
+    db_name: Name of the database
+    query_data: Query data
+    direct_node: Optional storage node to query directly
+    
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: _query_coordinator
+  Function Header: def _query_coordinator(self, db_name: str, query_data: Dict[str, Any]) -> Dict[str, Any]:
+  Docstring:
+    '''
+Send a query to the coordinator.
+
+Args:
+    db_name: Name of the database
+    query_data: Query data
+    
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: _query_storage_node
+  Function Header: def _query_storage_node(self, node: Dict[str, Any], db_name: str, query_data: Dict[str, Any]) -> Dict[str, Any]:
+  Docstring:
+    '''
+Send a query directly to a storage node.
+
+Args:
+    node: Storage node information
+    db_name: Name of the database
+    query_data: Query data
+    
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: get_storage_nodes
+  Function Header: def get_storage_nodes(self) -> List[Dict[str, Any]]:
+  Docstring:
+    '''
+Get a list of all storage nodes.
+
+Returns:
+    List of storage node information
+    '''
+--------------------
+  Function Name: get_database_partitions
+  Function Header: def get_database_partitions(self, db_name: str) -> List[Dict[str, Any]]:
+  Docstring:
+    '''
+Get a list of partitions for a database.
+
+Args:
+    db_name: Name of the database
+    
+Returns:
+    List of partition information
+    '''
+--------------------
+========================================
+Processing file: ./distributed_db/client/client.py
+  Function Name: __init__
+  Function Header: def __init__(self, coordinator_url: str):
+  Docstring:
+    '''
+Initialize the database client.
+
+Args:
+    coordinator_url: URL of the coordinator
+    '''
+--------------------
+  Function Name: create_database
+  Function Header: def create_database(self, name: str, db_type: DatabaseType, tables: Optional[List[TableSchema]]=None, partition_type: Optional[PartitionType]=None, partition_key: Optional[str]=None) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Create a new database.
+
+Args:
+    name: Name of the database
+    db_type: Type of database (SQL or NoSQL)
+    tables: List of table schemas (for SQL databases)
+    partition_type: Type of partitioning
+    partition_key: Key to partition by
+
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: list_databases
+  Function Header: def list_databases(self) -> List[str]:
+  Docstring:
+    '''
+List all databases.
+
+Returns:
+    List of database names
+    '''
+--------------------
+  Function Name: get_database
+  Function Header: def get_database(self, name: str) -> Optional[Dict[str, Any]]:
+  Docstring:
+    '''
+Get database information.
+
+Args:
+    name: Name of the database
+
+Returns:
+    Database information if found, None otherwise
+    '''
+--------------------
+  Function Name: delete_database
+  Function Header: def delete_database(self, name: str) -> Tuple[bool, Optional[str]]:
+  Docstring:
+    '''
+Delete a database.
+
+Args:
+    name: Name of the database
+
+Returns:
+    Tuple of (success, error_message)
+    '''
+--------------------
+  Function Name: sql_query
+  Function Header: def sql_query(self, db_name: str, table: str, columns: List[str]=None, where: Dict[str, Any]=None, order_by: str=None, limit: int=None) -> QueryResult:
+  Docstring:
+    '''
+Execute a SQL query.
+
+Args:
+    db_name: Name of the database
+    table: Name of the table
+    columns: List of columns to select (None for all)
+    where: Dictionary of column-value pairs for WHERE clause
+    order_by: Column to order by
+    limit: Maximum number of rows to return
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: sql_insert
+  Function Header: def sql_insert(self, db_name: str, table: str, values: Dict[str, Any]) -> QueryResult:
+  Docstring:
+    '''
+Insert a row into a SQL table.
+
+Args:
+    db_name: Name of the database
+    table: Name of the table
+    values: Dictionary of column-value pairs
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: sql_update
+  Function Header: def sql_update(self, db_name: str, table: str, values: Dict[str, Any], where: Dict[str, Any]=None) -> QueryResult:
+  Docstring:
+    '''
+Update rows in a SQL table.
+
+Args:
+    db_name: Name of the database
+    table: Name of the table
+    values: Dictionary of column-value pairs to update
+    where: Dictionary of column-value pairs for WHERE clause
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: sql_delete
+  Function Header: def sql_delete(self, db_name: str, table: str, where: Dict[str, Any]=None) -> QueryResult:
+  Docstring:
+    '''
+Delete rows from a SQL table.
+
+Args:
+    db_name: Name of the database
+    table: Name of the table
+    where: Dictionary of column-value pairs for WHERE clause
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: nosql_get
+  Function Header: def nosql_get(self, db_name: str, collection: str='default', doc_id: Any=None, where: Dict[str, Any]=None) -> QueryResult:
+  Docstring:
+    '''
+Get documents from a NoSQL collection.
+
+Args:
+    db_name: Name of the database
+    collection: Name of the collection
+    doc_id: Document ID (if getting a specific document)
+    where: Dictionary of field-value pairs to filter by
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: nosql_insert
+  Function Header: def nosql_insert(self, db_name: str, document: Dict[str, Any], collection: str='default') -> QueryResult:
+  Docstring:
+    '''
+Insert a document into a NoSQL collection.
+
+Args:
+    db_name: Name of the database
+    document: Document to insert
+    collection: Name of the collection
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: nosql_update
+  Function Header: def nosql_update(self, db_name: str, document: Dict[str, Any], doc_id: Any=None, where: Dict[str, Any]=None, collection: str='default') -> QueryResult:
+  Docstring:
+    '''
+Update documents in a NoSQL collection.
+
+Args:
+    db_name: Name of the database
+    document: Document fields to update
+    doc_id: Document ID (if updating a specific document)
+    where: Dictionary of field-value pairs to filter by
+    collection: Name of the collection
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: nosql_delete
+  Function Header: def nosql_delete(self, db_name: str, doc_id: Any=None, where: Dict[str, Any]=None, collection: str='default') -> QueryResult:
+  Docstring:
+    '''
+Delete documents from a NoSQL collection.
+
+Args:
+    db_name: Name of the database
+    doc_id: Document ID (if deleting a specific document)
+    where: Dictionary of field-value pairs to filter by
+    collection: Name of the collection
+
+Returns:
+    Query result
+    '''
+--------------------
+  Function Name: get_storage_nodes
+  Function Header: def get_storage_nodes(self) -> List[Dict[str, Any]]:
+  Docstring:
+    '''
+Get a list of all storage nodes.
+
+Returns:
+    List of storage node information
+    '''
+--------------------
+  Function Name: get_database_partitions
+  Function Header: def get_database_partitions(self, db_name: str) -> List[Dict[str, Any]]:
+  Docstring:
+    '''
+Get a list of partitions for a database.
+
+Args:
+    db_name: Name of the database
+
+Returns:
+    List of partition information
+    '''
+--------------------
+========================================

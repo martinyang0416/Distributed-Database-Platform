@@ -1,0 +1,647 @@
+(py310) MartinYang@MacBook-Pro-85 lab4final % ./cleanup.sh 
+Cleaning up temporary files...
+Removing JSON query files...
+Cleaning up database files...
+Removing PID files...
+Cleanup complete!
+(py310) MartinYang@MacBook-Pro-85 lab4final % ./demo_crud.sh
+
+==== Creating schema file ====
+
+Created schema file: demo_schema.json
+
+==== Starting coordinator ====
+
+$ python cli.py coordinator --host localhost --port 7000 &
+
+Coordinator started with PID: 40674
+Waiting for coordinator to start...
+Starting coordinator at localhost:7000...
+2025-05-02 16:36:57,853 - distributed_db.coordinator.consensus - INFO - Consensus manager initialized at localhost:7000 with partners []
+2025-05-02 16:36:57,853 - distributed_db.coordinator.schema_manager - INFO - Schema manager initialized with schema directory data/schemas
+2025-05-02 16:36:57,853 - distributed_db.coordinator.cache_manager - INFO - Cache manager initialized with max size 1000
+2025-05-02 16:36:57,856 - distributed_db.coordinator.coordinator - INFO - Coordinator initialized at localhost:7000
+2025-05-02 16:36:57,856 - distributed_db.coordinator.coordinator - INFO - Starting coordinator service at localhost:7000
+ * Serving Flask app 'distributed_db.coordinator.coordinator'
+ * Debug mode: off
+2025-05-02 16:36:57,860 - werkzeug - INFO - WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://localhost:7000
+2025-05-02 16:36:57,860 - werkzeug - INFO - Press CTRL+C to quit
+
+==== Starting storage nodes ====
+
+$ python cli.py storage-node --host localhost --port 7100 --coordinator http://localhost:7000 &
+
+Storage node 1 started with PID: 40732
+$ python cli.py storage-node --host localhost --port 7101 --coordinator http://localhost:7000 &
+
+Storage node 2 started with PID: 40733
+$ python cli.py storage-node --host localhost --port 7102 --coordinator http://localhost:7000 &
+
+Storage node 3 started with PID: 40734
+Waiting for storage nodes to register...
+Starting storage node at localhost:7100...
+2025-05-02 16:37:01,093 - distributed_db.storage.sql_storage - INFO - SQL storage initialized with data directory data/sql
+2025-05-02 16:37:01,093 - distributed_db.storage.nosql_storage - INFO - NoSQL storage initialized with data directory data/nosql
+2025-05-02 16:37:01,093 - distributed_db.storage.partition_manager - INFO - Partition manager initialized with partition directory data/partitions
+2025-05-02 16:37:01,093 - distributed_db.storage.replication_manager - INFO - Replication manager initialized for node d062faae-cc25-4bc0-a83b-cdde30beffc1
+2025-05-02 16:37:01,120 - distributed_db.coordinator.coordinator - INFO - Added storage node d062faae-cc25-4bc0-a83b-cdde30beffc1 to consensus store
+2025-05-02 16:37:01,121 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:01] "POST /nodes HTTP/1.1" 200 -
+2025-05-02 16:37:01,122 - distributed_db.storage.storage_node - INFO - Registered with coordinator at http://localhost:7000
+2025-05-02 16:37:01,122 - distributed_db.storage.storage_node - INFO - Storage node initialized at localhost:7100 with ID d062faae-cc25-4bc0-a83b-cdde30beffc1
+2025-05-02 16:37:01,122 - distributed_db.storage.storage_node - INFO - Starting storage node service at localhost:7100
+ * Serving Flask app 'distributed_db.storage.storage_node'
+ * Debug mode: off
+2025-05-02 16:37:01,125 - werkzeug - INFO - WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://localhost:7100
+2025-05-02 16:37:01,126 - werkzeug - INFO - Press CTRL+C to quit
+Starting storage node at localhost:7101...
+2025-05-02 16:37:01,135 - distributed_db.storage.sql_storage - INFO - SQL storage initialized with data directory data/sql
+2025-05-02 16:37:01,135 - distributed_db.storage.nosql_storage - INFO - NoSQL storage initialized with data directory data/nosql
+2025-05-02 16:37:01,135 - distributed_db.storage.partition_manager - INFO - Partition manager initialized with partition directory data/partitions
+2025-05-02 16:37:01,135 - distributed_db.storage.replication_manager - INFO - Replication manager initialized for node fbb0065c-9844-414f-8c3d-214b775dcb27
+Starting storage node at localhost:7102...
+2025-05-02 16:37:01,136 - distributed_db.storage.sql_storage - INFO - SQL storage initialized with data directory data/sql
+2025-05-02 16:37:01,136 - distributed_db.storage.nosql_storage - INFO - NoSQL storage initialized with data directory data/nosql
+2025-05-02 16:37:01,136 - distributed_db.storage.partition_manager - INFO - Partition manager initialized with partition directory data/partitions
+2025-05-02 16:37:01,137 - distributed_db.storage.replication_manager - INFO - Replication manager initialized for node 4adaa1b8-56c6-4259-bdb8-e2f0494275b3
+2025-05-02 16:37:01,171 - distributed_db.coordinator.coordinator - INFO - Added storage node fbb0065c-9844-414f-8c3d-214b775dcb27 to consensus store
+2025-05-02 16:37:01,171 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:01] "POST /nodes HTTP/1.1" 200 -
+2025-05-02 16:37:01,172 - distributed_db.coordinator.coordinator - INFO - Added storage node 4adaa1b8-56c6-4259-bdb8-e2f0494275b3 to consensus store
+2025-05-02 16:37:01,172 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:01] "POST /nodes HTTP/1.1" 200 -
+2025-05-02 16:37:01,172 - distributed_db.storage.storage_node - INFO - Registered with coordinator at http://localhost:7000
+2025-05-02 16:37:01,173 - distributed_db.storage.storage_node - INFO - Storage node initialized at localhost:7101 with ID fbb0065c-9844-414f-8c3d-214b775dcb27
+2025-05-02 16:37:01,173 - distributed_db.storage.storage_node - INFO - Starting storage node service at localhost:7101
+ * Serving Flask app 'distributed_db.storage.storage_node'
+ * Debug mode: off
+2025-05-02 16:37:01,173 - distributed_db.storage.storage_node - INFO - Registered with coordinator at http://localhost:7000
+2025-05-02 16:37:01,173 - distributed_db.storage.storage_node - INFO - Storage node initialized at localhost:7102 with ID 4adaa1b8-56c6-4259-bdb8-e2f0494275b3
+2025-05-02 16:37:01,173 - distributed_db.storage.storage_node - INFO - Starting storage node service at localhost:7102
+ * Serving Flask app 'distributed_db.storage.storage_node'
+ * Debug mode: off
+2025-05-02 16:37:01,175 - werkzeug - INFO - WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://localhost:7102
+2025-05-02 16:37:01,175 - werkzeug - INFO - WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://localhost:7101
+2025-05-02 16:37:01,175 - werkzeug - INFO - Press CTRL+C to quit
+2025-05-02 16:37:01,175 - werkzeug - INFO - Press CTRL+C to quit
+
+==== Creating database ====
+
+$ python cli.py create-database --coordinator http://localhost:7000 --name demo_db --type sql --schema-file demo_schema.json --partition-type horizontal --partition-key id
+2025-05-02 16:37:03,979 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:03,979 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:03,987 - distributed_db.coordinator.coordinator - INFO - Added database demo_db to consensus store
+2025-05-02 16:37:03,987 - distributed_db.coordinator.coordinator - INFO - Created horizontal partition for database 'demo_db'
+2025-05-02 16:37:03,987 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:03] "POST /databases HTTP/1.1" 200 -
+2025-05-02 16:37:03,987 - distributed_db.client.client - INFO - Created database 'demo_db'
+2025-05-02 16:37:03,990 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:03] "GET /partitions/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:03,991 - distributed_db.client.client - INFO - Waiting for database 'demo_db' to be fully ready (attempt 1/3)
+2025-05-02 16:37:04,073 - distributed_db.coordinator.consensus - INFO - Added partition f6fa8562-b488-49b6-adb1-636ef1c49027 to consensus store
+2025-05-02 16:37:04,994 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:04] "GET /partitions/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:04,994 - distributed_db.client.client - INFO - Database 'demo_db' is ready with 1 partitions
+Database 'demo_db' created successfully.
+
+Waiting for database to be fully created...
+
+==== Listing databases ====
+
+$ python cli.py list-databases --coordinator http://localhost:7000
+2025-05-02 16:37:07,205 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:07,205 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:07,215 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:07] "GET /databases HTTP/1.1" 200 -
+Available databases:
+2025-05-02 16:37:07,219 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:07] "GET /databases/demo_db HTTP/1.1" 200 -
+  - demo_db (SQL)
+
+
+==== Creating insert query files ====
+
+Created insert_user1.json
+Created insert_user2.json
+Created insert_order1.json
+Created insert_order2.json
+Created insert_order3.json
+
+==== Creating query files ====
+
+Created query_users.json
+Created query_orders.json
+Created query_user_orders.json
+Created update_user.json
+Created delete_order.json
+
+==== CREATE: Inserting data ====
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file insert_user1.json
+2025-05-02 16:37:09,706 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:09,706 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:09,729 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'insert', 'table': 'users', 'values': {'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': 30}}
+2025-05-02 16:37:09,729 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:09,729 - distributed_db.storage.storage_node - INFO - Database 'demo_db' doesn't exist, creating it for insert operation
+2025-05-02 16:37:09,729 - distributed_db.storage.storage_node - INFO - Created SQL database 'demo_db'
+2025-05-02 16:37:09,730 - distributed_db.storage.sql_storage - INFO - Creating table: CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT, email TEXT, age TEXT)
+2025-05-02 16:37:09,730 - distributed_db.storage.sql_storage - INFO - Created table 'users' in database 'demo_db'
+2025-05-02 16:37:09,731 - distributed_db.storage.sql_storage - INFO - Executing SQL insert: INSERT INTO users (id, name, email, age) VALUES (?, ?, ?, ?) with values [1, 'John Doe', 'john@example.com', 30]
+2025-05-02 16:37:09,731 - distributed_db.storage.sql_storage - INFO - Selecting inserted row: SELECT * FROM users WHERE id = ? with id 1
+2025-05-02 16:37:09,731 - distributed_db.storage.sql_storage - INFO - Inserted row: {'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '30'}
+2025-05-02 16:37:09,731 - distributed_db.storage.storage_node - INFO - SQL query result after creating database: [{'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '30'}]
+2025-05-02 16:37:09,733 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:09] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:09,736 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:09] "POST /query/demo_db HTTP/1.1" 200 -
+Query results:
+{
+  "age": "30",
+  "email": "john@example.com",
+  "id": 1,
+  "name": "John Doe"
+}
+Affected rows: 1
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file insert_user2.json
+2025-05-02 16:37:09,922 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:09,922 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:09,941 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'insert', 'table': 'users', 'values': {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': 25}}
+2025-05-02 16:37:09,941 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:09,941 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:09,942 - distributed_db.storage.sql_storage - INFO - Executing SQL insert: INSERT INTO users (id, name, email, age) VALUES (?, ?, ?, ?) with values [2, 'Jane Smith', 'jane@example.com', 25]
+2025-05-02 16:37:09,942 - distributed_db.storage.sql_storage - INFO - Selecting inserted row: SELECT * FROM users WHERE id = ? with id 2
+2025-05-02 16:37:09,942 - distributed_db.storage.sql_storage - INFO - Inserted row: {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': '25'}
+2025-05-02 16:37:09,942 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': '25'}]
+2025-05-02 16:37:09,942 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:09] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:09,943 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:09] "POST /query/demo_db HTTP/1.1" 200 -
+Query results:
+{
+  "age": "25",
+  "email": "jane@example.com",
+  "id": 2,
+  "name": "Jane Smith"
+}
+Affected rows: 1
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file insert_order1.json
+2025-05-02 16:37:10,122 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,122 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,144 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'insert', 'table': 'orders', 'values': {'id': 1, 'user_id': 1, 'product': 'Laptop', 'quantity': 1, 'price': 999.99}}
+2025-05-02 16:37:10,145 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,145 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,145 - distributed_db.storage.sql_storage - INFO - Creating table: CREATE TABLE orders (id INTEGER PRIMARY KEY, user_id TEXT, product TEXT, quantity TEXT, price TEXT)
+2025-05-02 16:37:10,146 - distributed_db.storage.sql_storage - INFO - Created table 'orders' in database 'demo_db'
+2025-05-02 16:37:10,146 - distributed_db.storage.sql_storage - INFO - Executing SQL insert: INSERT INTO orders (id, user_id, product, quantity, price) VALUES (?, ?, ?, ?, ?) with values [1, 1, 'Laptop', 1, 999.99]
+2025-05-02 16:37:10,146 - distributed_db.storage.sql_storage - INFO - Selecting inserted row: SELECT * FROM orders WHERE id = ? with id 1
+2025-05-02 16:37:10,146 - distributed_db.storage.sql_storage - INFO - Inserted row: {'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}
+2025-05-02 16:37:10,146 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}]
+2025-05-02 16:37:10,147 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,147 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+Query results:
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+Affected rows: 1
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file insert_order2.json
+2025-05-02 16:37:10,325 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,325 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,337 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'insert', 'table': 'orders', 'values': {'id': 2, 'user_id': 1, 'product': 'Mouse', 'quantity': 2, 'price': 24.99}}
+2025-05-02 16:37:10,337 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,337 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,337 - distributed_db.storage.sql_storage - INFO - Executing SQL insert: INSERT INTO orders (id, user_id, product, quantity, price) VALUES (?, ?, ?, ?, ?) with values [2, 1, 'Mouse', 2, 24.99]
+2025-05-02 16:37:10,338 - distributed_db.storage.sql_storage - INFO - Selecting inserted row: SELECT * FROM orders WHERE id = ? with id 2
+2025-05-02 16:37:10,338 - distributed_db.storage.sql_storage - INFO - Inserted row: {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}
+2025-05-02 16:37:10,338 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}]
+2025-05-02 16:37:10,338 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,339 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+Query results:
+{
+  "id": 2,
+  "price": "24.99",
+  "product": "Mouse",
+  "quantity": "2",
+  "user_id": "1"
+}
+Affected rows: 1
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file insert_order3.json
+2025-05-02 16:37:10,530 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,530 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,543 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'insert', 'table': 'orders', 'values': {'id': 3, 'user_id': 2, 'product': 'Keyboard', 'quantity': 1, 'price': 49.99}}
+2025-05-02 16:37:10,543 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,543 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,543 - distributed_db.storage.sql_storage - INFO - Executing SQL insert: INSERT INTO orders (id, user_id, product, quantity, price) VALUES (?, ?, ?, ?, ?) with values [3, 2, 'Keyboard', 1, 49.99]
+2025-05-02 16:37:10,544 - distributed_db.storage.sql_storage - INFO - Selecting inserted row: SELECT * FROM orders WHERE id = ? with id 3
+2025-05-02 16:37:10,544 - distributed_db.storage.sql_storage - INFO - Inserted row: {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}
+2025-05-02 16:37:10,544 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:10,544 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,545 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+Query results:
+{
+  "id": 3,
+  "price": "49.99",
+  "product": "Keyboard",
+  "quantity": "1",
+  "user_id": "2"
+}
+Affected rows: 1
+
+
+==== READ: Querying data ====
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file query_users.json
+2025-05-02 16:37:10,725 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,726 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,734 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'users', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:10,734 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,734 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,734 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM users with params []
+2025-05-02 16:37:10,735 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '30'}, {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': '25'}]
+2025-05-02 16:37:10,735 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '30'}, {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': '25'}]
+2025-05-02 16:37:10,735 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,746 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'users', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:10,748 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,748 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,750 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM users with params []
+2025-05-02 16:37:10,750 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '30'}, {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': '25'}]
+2025-05-02 16:37:10,750 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '30'}, {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': '25'}]
+2025-05-02 16:37:10,752 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,759 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'users', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:10,759 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,759 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,760 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM users with params []
+2025-05-02 16:37:10,760 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '30'}, {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': '25'}]
+2025-05-02 16:37:10,760 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '30'}, {'id': 2, 'name': 'Jane Smith', 'email': 'jane@example.com', 'age': '25'}]
+2025-05-02 16:37:10,760 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,761 - distributed_db.coordinator.coordinator - INFO - Combined query results: [{'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}, {'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}, {'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}]
+2025-05-02 16:37:10,761 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,762 - distributed_db.client.client - INFO - Query result from coordinator: [{'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}, {'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}, {'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}]
+Query results:
+{
+  "age": "30",
+  "email": "john@example.com",
+  "id": 1,
+  "name": "John Doe"
+}
+{
+  "age": "25",
+  "email": "jane@example.com",
+  "id": 2,
+  "name": "Jane Smith"
+}
+{
+  "age": "30",
+  "email": "john@example.com",
+  "id": 1,
+  "name": "John Doe"
+}
+{
+  "age": "25",
+  "email": "jane@example.com",
+  "id": 2,
+  "name": "Jane Smith"
+}
+{
+  "age": "30",
+  "email": "john@example.com",
+  "id": 1,
+  "name": "John Doe"
+}
+{
+  "age": "25",
+  "email": "jane@example.com",
+  "id": 2,
+  "name": "Jane Smith"
+}
+Affected rows: 0
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file query_orders.json
+2025-05-02 16:37:10,939 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,939 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:10,952 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:10,952 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,952 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,952 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders with params []
+2025-05-02 16:37:10,952 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:10,953 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:10,953 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,956 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:10,956 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,956 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,957 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders with params []
+2025-05-02 16:37:10,957 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:10,957 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:10,958 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,960 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:10,960 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:10,960 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:10,960 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders with params []
+2025-05-02 16:37:10,960 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:10,961 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:10,961 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,961 - distributed_db.coordinator.coordinator - INFO - Combined query results: [{'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}]
+2025-05-02 16:37:10,961 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:10] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:10,962 - distributed_db.client.client - INFO - Query result from coordinator: [{'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}]
+Query results:
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 2,
+  "price": "24.99",
+  "product": "Mouse",
+  "quantity": "2",
+  "user_id": "1"
+}
+{
+  "id": 3,
+  "price": "49.99",
+  "product": "Keyboard",
+  "quantity": "1",
+  "user_id": "2"
+}
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 2,
+  "price": "24.99",
+  "product": "Mouse",
+  "quantity": "2",
+  "user_id": "1"
+}
+{
+  "id": 3,
+  "price": "49.99",
+  "product": "Keyboard",
+  "quantity": "1",
+  "user_id": "2"
+}
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 2,
+  "price": "24.99",
+  "product": "Mouse",
+  "quantity": "2",
+  "user_id": "1"
+}
+{
+  "id": 3,
+  "price": "49.99",
+  "product": "Keyboard",
+  "quantity": "1",
+  "user_id": "2"
+}
+Affected rows: 0
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file query_user_orders.json
+2025-05-02 16:37:11,149 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,149 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,160 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {'user_id': 1}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:11,160 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,160 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,161 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders WHERE user_id = ? with params [1]
+2025-05-02 16:37:11,161 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}]
+2025-05-02 16:37:11,161 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}]
+2025-05-02 16:37:11,161 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,168 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {'user_id': 1}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:11,168 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,168 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,169 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders WHERE user_id = ? with params [1]
+2025-05-02 16:37:11,169 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}]
+2025-05-02 16:37:11,169 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}]
+2025-05-02 16:37:11,169 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,172 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {'user_id': 1}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:11,172 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,172 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,172 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders WHERE user_id = ? with params [1]
+2025-05-02 16:37:11,172 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}]
+2025-05-02 16:37:11,172 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 2, 'user_id': '1', 'product': 'Mouse', 'quantity': '2', 'price': '24.99'}]
+2025-05-02 16:37:11,172 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,172 - distributed_db.coordinator.coordinator - INFO - Combined query results: [{'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}]
+2025-05-02 16:37:11,173 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,173 - distributed_db.client.client - INFO - Query result from coordinator: [{'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 2, 'price': '24.99', 'product': 'Mouse', 'quantity': '2', 'user_id': '1'}]
+Query results:
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 2,
+  "price": "24.99",
+  "product": "Mouse",
+  "quantity": "2",
+  "user_id": "1"
+}
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 2,
+  "price": "24.99",
+  "product": "Mouse",
+  "quantity": "2",
+  "user_id": "1"
+}
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 2,
+  "price": "24.99",
+  "product": "Mouse",
+  "quantity": "2",
+  "user_id": "1"
+}
+Affected rows: 0
+
+
+==== UPDATE: Updating data ====
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file update_user.json
+2025-05-02 16:37:11,347 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,347 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,363 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'update', 'table': 'users', 'values': {'age': 31}, 'where': {'id': 1}}
+2025-05-02 16:37:11,363 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,363 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,364 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'name': 'John Doe', 'email': 'john@example.com', 'age': '31'}]
+2025-05-02 16:37:11,364 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,365 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+Query results:
+No data returned
+Affected rows: -1
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file query_users.json
+2025-05-02 16:37:11,549 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,549 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,556 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,557 - distributed_db.client.client - INFO - Query result from coordinator: [{'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}, {'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}, {'age': '30', 'email': 'john@example.com', 'id': 1, 'name': 'John Doe'}, {'age': '25', 'email': 'jane@example.com', 'id': 2, 'name': 'Jane Smith'}]
+Query results:
+{
+  "age": "30",
+  "email": "john@example.com",
+  "id": 1,
+  "name": "John Doe"
+}
+{
+  "age": "25",
+  "email": "jane@example.com",
+  "id": 2,
+  "name": "Jane Smith"
+}
+{
+  "age": "30",
+  "email": "john@example.com",
+  "id": 1,
+  "name": "John Doe"
+}
+{
+  "age": "25",
+  "email": "jane@example.com",
+  "id": 2,
+  "name": "Jane Smith"
+}
+{
+  "age": "30",
+  "email": "john@example.com",
+  "id": 1,
+  "name": "John Doe"
+}
+{
+  "age": "25",
+  "email": "jane@example.com",
+  "id": 2,
+  "name": "Jane Smith"
+}
+Affected rows: 0
+
+
+==== DELETE: Deleting data ====
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file delete_order.json
+2025-05-02 16:37:11,734 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,734 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,746 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'delete', 'table': 'orders', 'where': {'id': 2}}
+2025-05-02 16:37:11,746 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,746 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,747 - distributed_db.storage.storage_node - INFO - SQL query result: None
+2025-05-02 16:37:11,747 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,751 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'delete', 'table': 'orders', 'where': {'id': 2}}
+2025-05-02 16:37:11,751 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,751 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,751 - distributed_db.storage.storage_node - INFO - SQL query result: None
+2025-05-02 16:37:11,751 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,754 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'delete', 'table': 'orders', 'where': {'id': 2}}
+2025-05-02 16:37:11,754 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,754 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,754 - distributed_db.storage.storage_node - INFO - SQL query result: None
+2025-05-02 16:37:11,754 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,755 - distributed_db.coordinator.coordinator - INFO - Invalidated 3 cache entries for database 'demo_db'
+2025-05-02 16:37:11,755 - distributed_db.coordinator.coordinator - INFO - Delete operation affected 1 rows
+2025-05-02 16:37:11,755 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+Query results:
+No data returned
+Affected rows: 1
+
+$ python cli.py query --coordinator http://localhost:7000 --db-name demo_db --operation sql --query-file query_orders.json
+2025-05-02 16:37:11,939 - distributed_db.client.query_router - INFO - Query router initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,939 - distributed_db.client.client - INFO - Database client initialized with coordinator URL http://localhost:7000
+2025-05-02 16:37:11,949 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:11,950 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,950 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,950 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders with params []
+2025-05-02 16:37:11,950 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:11,950 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:11,950 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,953 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:11,953 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,953 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,953 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders with params []
+2025-05-02 16:37:11,953 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:11,953 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:11,953 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,956 - distributed_db.storage.storage_node - INFO - Received query for database 'demo_db': {'operation': 'query', 'table': 'orders', 'columns': ['*'], 'where': {}, 'order_by': None, 'limit': None}
+2025-05-02 16:37:11,956 - distributed_db.storage.storage_node - INFO - Partitions for database 'demo_db': []
+2025-05-02 16:37:11,956 - distributed_db.storage.storage_node - INFO - Executing SQL query on database 'demo_db'
+2025-05-02 16:37:11,956 - distributed_db.storage.sql_storage - INFO - Executing SQL query: SELECT * FROM orders with params []
+2025-05-02 16:37:11,956 - distributed_db.storage.sql_storage - INFO - Query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:11,956 - distributed_db.storage.storage_node - INFO - SQL query result: [{'id': 1, 'user_id': '1', 'product': 'Laptop', 'quantity': '1', 'price': '999.99'}, {'id': 3, 'user_id': '2', 'product': 'Keyboard', 'quantity': '1', 'price': '49.99'}]
+2025-05-02 16:37:11,956 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,957 - distributed_db.coordinator.coordinator - INFO - Combined query results: [{'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}]
+2025-05-02 16:37:11,957 - werkzeug - INFO - 127.0.0.1 - - [02/May/2025 16:37:11] "POST /query/demo_db HTTP/1.1" 200 -
+2025-05-02 16:37:11,957 - distributed_db.client.client - INFO - Query result from coordinator: [{'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}, {'id': 1, 'price': '999.99', 'product': 'Laptop', 'quantity': '1', 'user_id': '1'}, {'id': 3, 'price': '49.99', 'product': 'Keyboard', 'quantity': '1', 'user_id': '2'}]
+Query results:
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 3,
+  "price": "49.99",
+  "product": "Keyboard",
+  "quantity": "1",
+  "user_id": "2"
+}
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 3,
+  "price": "49.99",
+  "product": "Keyboard",
+  "quantity": "1",
+  "user_id": "2"
+}
+{
+  "id": 1,
+  "price": "999.99",
+  "product": "Laptop",
+  "quantity": "1",
+  "user_id": "1"
+}
+{
+  "id": 3,
+  "price": "49.99",
+  "product": "Keyboard",
+  "quantity": "1",
+  "user_id": "2"
+}
+Affected rows: 0
+
+
+==== Demo completed successfully! ====
+
+All CRUD operations were demonstrated successfully.
+Press Enter to clean up and exit...

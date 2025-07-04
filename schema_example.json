@@ -1,0 +1,63 @@
+{
+  "tables": [
+    {
+      "name": "users",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "primary_key": true,
+          "nullable": false
+        },
+        {
+          "name": "username",
+          "data_type": "TEXT",
+          "nullable": false
+        },
+        {
+          "name": "email",
+          "data_type": "TEXT",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": ["username", "email"]
+    },
+    {
+      "name": "posts",
+      "columns": [
+        {
+          "name": "id",
+          "data_type": "INTEGER",
+          "primary_key": true,
+          "nullable": false
+        },
+        {
+          "name": "user_id",
+          "data_type": "INTEGER",
+          "nullable": false
+        },
+        {
+          "name": "title",
+          "data_type": "TEXT",
+          "nullable": false
+        },
+        {
+          "name": "content",
+          "data_type": "TEXT",
+          "nullable": true
+        },
+        {
+          "name": "created_at",
+          "data_type": "TIMESTAMP",
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": ["user_id"]
+    }
+  ]
+}

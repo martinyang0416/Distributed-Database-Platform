@@ -1,0 +1,10 @@
+{
+  "operation": "query",
+  "table": "users",
+  "columns": ["id", "username", "email"],
+  "where": {
+    "id": {"$gt": 5}
+  },
+  "order_by": "username",
+  "limit": 10
+}
